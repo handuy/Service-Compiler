@@ -6,39 +6,24 @@ import (
 	"git.hocngay.com/techmaster/service-complier/cons"
 	model "git.hocngay.com/techmaster/service-complier/proto"
 	"github.com/rs/xid"
-	"io/ioutil"
 	"os"
-	"strings"
 )
 
 //Trả về path của folder đã được khởi tạo
-func CreateImageGo(req *model.CompileRequest) (string, error) {
+func CreateFileComplie(req *model.CompileRequest) (string, error) {
 	uuid := xid.New().String()
-	uFolder := fmt.Sprintf("%s/%s", cons.RootTemp, uuid)
-	uDocker := fmt.Sprintf("%s/%s", uFolder, "Dockerfile")
-	uGoFile := fmt.Sprintf("%s/%s.go", uFolder, uuid)
+	uGoFile := fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
 
-	if _, err := os.Stat(uFolder); os.IsNotExist(err) {
-		os.MkdirAll(uFolder, os.FileMode(0777))
+	if _, err := os.Stat(cons.RootGo); os.IsNotExist(err) {
+		os.MkdirAll(cons.RootGo, os.FileMode(0777))
 	}
 
-	dockerFile := strings.Replace(cons.GoDocker, "temp_folder_id", uuid, -1)
-	err := ioutil.WriteFile(uDocker, []byte(dockerFile), 07777)
+	_, err := SaveToFile(uGoFile, req)
 	if err != nil {
 		return "", err
 	}
 
-	_, err = SaveToFile(uGoFile, req)
-	if err != nil {
-		return "", err
-	}
-	shell := strings.Replace(cons.BaseBash, "temp_folder_id", uuid, -1)
-	err = ioutil.WriteFile(uFolder+"/run.sh", []byte(shell), 0777)
-	if err != nil {
-		return "", err
-	}
-
-	return uFolder, nil
+	return fmt.Sprintf("%s.%s", uuid, req.Language), nil
 }
 
 func SaveToFile(path string, req *model.CompileRequest) (string, error) {

@@ -156,17 +156,18 @@
   version = "v1.2.0"
 
 [[projects]]
-  name = "github.com/teris-io/shortid"
+  name = "github.com/sirupsen/logrus"
   packages = ["."]
-  revision = "6c56cef5189ca1b3d5ef01dc07f4d611dfc0bb33"
-  version = "v1.0"
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = [
     "ed25519",
-    "ed25519/internal/edwards25519"
+    "ed25519/internal/edwards25519",
+    "ssh/terminal"
   ]
   revision = "37a17fe027db43f76fd88b056ddf588563fc8722"
 
@@ -195,6 +196,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "072667034361d7b0b35b92c614546c4fda0062aa17ba370e015b09c244203aa6"
+  inputs-digest = "18b85df26877bc7b13b32bbb70fd5260e56de1a6437f0c887cc4bcbe34198de0"
   solver-name = "gps-cdcl"
   solver-version = 1
