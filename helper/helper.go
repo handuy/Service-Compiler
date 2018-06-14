@@ -12,13 +12,21 @@ import (
 //Trả về path của folder đã được khởi tạo
 func CreateFileComplie(req *model.CompileRequest) (string, error) {
 	uuid := xid.New().String()
-	uGoFile := fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
+	var filePath string
+	switch req.Language {
+	case "go":
+		filePath = fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
+		break
+	case "javascript","nodejs":
+		filePath = fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
+		break
+	}
 
 	if _, err := os.Stat(cons.RootGo); os.IsNotExist(err) {
 		os.MkdirAll(cons.RootGo, os.FileMode(0777))
 	}
 
-	_, err := SaveToFile(uGoFile, req)
+	_, err := SaveToFile(filePath, req)
 	if err != nil {
 		return "", err
 	}
