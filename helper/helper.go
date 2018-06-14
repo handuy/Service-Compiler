@@ -12,18 +12,20 @@ import (
 //Trả về path của folder đã được khởi tạo
 func CreateFileComplie(req *model.CompileRequest) (string, error) {
 	uuid := xid.New().String()
-	var filePath string
+	var folder,filePath string
 	switch req.Language {
-	case "go":
+	case "go","golang":
 		filePath = fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
+		folder=cons.RootGo
 		break
-	case "javascript","nodejs":
-		filePath = fmt.Sprintf("%s/%s.%s", cons.RootGo, uuid, req.Language)
+	case "javascript","nodejs","js":
+		filePath = fmt.Sprintf("%s/%s.%s", cons.RootJS, uuid, req.Language)
+		folder=cons.RootJS
 		break
 	}
 
-	if _, err := os.Stat(cons.RootGo); os.IsNotExist(err) {
-		os.MkdirAll(cons.RootGo, os.FileMode(0777))
+	if _, err := os.Stat(folder); os.IsNotExist(err) {
+		os.MkdirAll(folder, os.FileMode(0777))
 	}
 
 	_, err := SaveToFile(filePath, req)
