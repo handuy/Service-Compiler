@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-//Trả về path của folder đã được khởi tạo
+//Trả về file name đã được khởi tạo
 func CreateFileComplie(req *model.CompileRequest) (string, error) {
 	uuid := xid.New().String()
 	var folder,filePath string

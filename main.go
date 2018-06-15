@@ -22,7 +22,7 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 			cErr <- helper.CompileGo(path, rsp)
 			return
 		case "js":
-			cErr <- helper.CompileNode(path)
+			cErr <- helper.CompileNode(path,rsp)
 			return
 		case "py":
 		}
