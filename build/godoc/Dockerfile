@@ -14,4 +14,8 @@ RUN export PATH=$PATH:$GOROOT/bin
 
 VOLUME $GOPATH/src/server
 
+RUN adduser -D dev
+
+USER dev
+
 CMD ["./svc"]

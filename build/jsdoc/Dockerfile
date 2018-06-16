@@ -8,4 +8,8 @@ ADD . $HOME/app
 
 WORKDIR $HOME/app
 
+RUN adduser -D dev
+
+USER dev
+
 CMD ["node","run.js"]
