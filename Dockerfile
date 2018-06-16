@@ -8,7 +8,7 @@ WORKDIR $GOPATH/src/git.hocngay.com/techmaster/service-complier
 
 RUN go build -o service-complier .
 
-RUN apk install sudo
+RUN  apk-install sudo
 
 RUN chmod +x ./installdocker.sh && ./installdocker.sh
 
