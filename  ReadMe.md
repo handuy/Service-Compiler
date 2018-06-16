@@ -32,6 +32,8 @@ B3: GetLog của đoạn code và so sánh với kết quả mong muốn(có th�
   
   
 B4: Trả về kết quả
+
+
 Cron job sẽ tìm kiếm các file cũ(file tồn tại quá 1 tiếng để delete)
 
 
