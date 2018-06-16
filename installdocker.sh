@@ -1,16 +1,24 @@
 #!/bin/sh
 
-set -e
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
 
-sed -e 's;^#http\(.*\)/v3.6/community;http\1/v3.6/community;g' \
-     -i /etc/apk/repositories
-apk add openrc
-apk update
-apk add docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-memb=$(grep "^docker:" /etc/group | sed -e 's/^.*:\([^:]*\)$/\1/g')
-[ "${memb}x" = "x" ] && memb=${USER} || memb="${memb},${USER}"
+sudo apt-key fingerprint 0EBFCD88
 
-sed -e "s/^docker:\(.*\):\([^:]*\)$/docker:\1:${memb}/g" -i /etc/group
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
-rc-update add docker
+sudo apt-get update
+
+sudo apt-get install docker-ce
+
+sudo usermod -aG docker dev
+
+sudo reboot

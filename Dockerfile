@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:latest
 
 RUN mkdir -p $GOPATH/src/git.hocngay.com/techmaster/service-complier
 
