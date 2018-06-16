@@ -18,13 +18,29 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 	}
 	go func() {
 		switch req.Language {
+		case "c":
+			cErr <- helper.ComplieC(path, rsp)
+			return
+		//case "c++":
+		//	cErr <- helper.ComplieCPlus(path, rsp)
+		//	return
+		//case "c#":
+		//	cErr <- helper.ComplieDotNet(path, rsp)
+		//	return
+		//case "php":
+		//	cErr <- helper.ComplieDotNet(path, rsp)
+		//	return
+		//case "java":
+		//	cErr <- helper.ComplieDotNet(path, rsp)
+		//	return
 		case "go":
 			cErr <- helper.CompileGo(path, rsp)
 			return
 		case "js":
-			cErr <- helper.CompileNode(path,rsp)
+			cErr <- helper.CompileNode(path, rsp)
 			return
 		case "py":
+			
 		}
 	}()
 	return <-cErr

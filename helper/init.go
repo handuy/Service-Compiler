@@ -9,6 +9,7 @@ import (
 func Init() {
 	initGo()
 	initNodeJS()
+	//initC()
 }
 
 func initGo() {
@@ -35,6 +36,21 @@ func initNodeJS() {
 	logrus.Infof("%s", out)
 
 	out, err = exec.Command("docker", "run", "-d", "--rm", "--name", cons.ComplierJS, cons.ComplierJS).Output()
+	if err != nil {
+		logrus.Errorf("%s\n", err)
+	}
+	logrus.Infof("%s\n", out)
+}
+
+func initC() {
+	logrus.Infoln("Init compiler JS container !")
+	out, err := exec.Command("docker", "build", "-t", cons.ComplierC, cons.CDockerfile).Output()
+	if err != nil {
+		logrus.Errorf("%s", err)
+	}
+	logrus.Infof("%s", out)
+
+	out, err = exec.Command("docker", "run", "-d", "--rm", "--name", cons.ComplierC, cons.ComplierC).Output()
 	if err != nil {
 		logrus.Errorf("%s\n", err)
 	}

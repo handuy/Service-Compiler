@@ -12,4 +12,9 @@ const (
 	ComplierJS   = "complier-js"
 	PathFileJS   = "/root/temp"
 	JSDockerfile = "./build/jsdoc/."
+
+	RootC="./temp/c"
+	ComplierC="complier-c"
+	PathFileC="/root/temp"
+	CDockerfile="./build/cdoc/."
 )
