@@ -1,5 +1,7 @@
 #!/bin/sh
 
+apt-get install sudo
+
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
