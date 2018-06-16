@@ -1,5 +1,7 @@
 FROM gcc:4.9
 
-COPY . /root/temp
+COPY . /home/root/cleaner
 
-WORKDIR /root/temp
+WORKDIR /home/root/temp
+
+CMD ["./cleaner"]
