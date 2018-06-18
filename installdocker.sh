@@ -1,6 +1,7 @@
 #!/bin/sh
 
-apt-get update
+rm /var/lib/apt/lists/*
+
 
 apt-get -y install \
     apt-transport-https \
@@ -8,7 +9,7 @@ apt-get -y install \
     curl \
     software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
 apt-key fingerprint 0EBFCD88
 
