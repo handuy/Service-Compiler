@@ -2,6 +2,7 @@
 
 rm /var/lib/apt/lists/*
 
+lsb_release -a
 
 apt-get -y install \
     apt-transport-https \
