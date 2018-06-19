@@ -19,11 +19,13 @@ RUN mkdir /app/temp
 
 ADD root /
 
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/build /app/build/
+
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/root /app/root/
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/complier /app/
 
-RUN apk update && apk add docker
+RUN apk update && apk add docker && apk add openrc
 
 RUN rc-update add docker boot
 
