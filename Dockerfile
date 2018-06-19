@@ -13,7 +13,7 @@ WORKDIR $WDIR
 
 RUN go build -o compiler ./cmd/run
 
-RUN ls
+RUN ls && echo $WDIR
 
 FROM minhcuong/alpine-consul
 
