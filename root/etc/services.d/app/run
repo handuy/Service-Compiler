@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
-whoami
+whoami;
 
-chmod +x /app/complier
+chmod +x /app/complier;
 
 cd /app && exec /app/complier;
