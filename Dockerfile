@@ -25,6 +25,8 @@ COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/r
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/complier /app/
 
+RUN chmod +x /app/complier
+
 RUN apk update && apk add docker && apk add openrc
 
 RUN rc-update add docker boot
