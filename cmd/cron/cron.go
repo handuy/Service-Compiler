@@ -1,4 +1,4 @@
-package main
+package cron
 
 import "git.hocngay.com/techmaster/service-complier/crons"
 

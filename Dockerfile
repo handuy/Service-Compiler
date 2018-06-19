@@ -11,7 +11,7 @@ ADD . $WDIR
 
 WORKDIR $WDIR
 
-RUN go build -o compiler .
+RUN go build -o compiler ./cmd/run
 
 FROM minhcuong/alpine-consul
 
