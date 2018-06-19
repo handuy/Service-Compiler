@@ -5,7 +5,7 @@ mkdir -p ./gen/docker
 
 tar xzvf ./docker-18.03.1-ce.tgz 
 
-cp /home/test/autobash/docker/* /usr/bin/
+cp ./docker/* /usr/bin/
 
 dockerd &
 
