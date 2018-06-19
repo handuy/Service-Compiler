@@ -1,17 +1,40 @@
-FROM ubuntu:16.04
+FROM golang:alpine AS build-compiler
 
-RUN apt-get -y update&& apt-get -y upgrade
+ENV HOST 0.0.0.0
 
-RUN apt-get install -y wget
+ENV WDIR $GOPATH/src/git.hocngay.com/techmaster/service-complier
 
-RUN mkdir /app/
 
-WORKDIR /app/
+RUN mkdir -p $WDIR
 
-ADD . /app/
+ADD . $WDIR
 
-RUN chmod +x ./installdocker.sh && chmod +x ./installgo.sh
+WORKDIR $WDIR
 
-RUN ./installdocker.sh
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
 
-RUN ./installgo.sh
+RUN git checkout development
+
+RUN go build -o compiler .
+
+FROM minhcuong/alpine-consul
+
+# Add s6 service
+ADD root /
+
+RUN mkdir -p /app/data/
+RUN mkdir /app/temp
+
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-compiler/build /app/build/
+
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-compiler/compiler /app/
+
+RUN apk update && apk add docker
+
+RUN rc-update add docker boot
+
+RUN service docker start
+
+
+EXPOSE 8888
