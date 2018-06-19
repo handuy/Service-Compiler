@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  compiler:
+    build: .
+    depends_on:
+      - consul
+    networks:
+      - brige
+
+  consul:
+    image: minhcuong/alpine-consul
+    networks:
+      - brige
+
+networks:
+  brige:
