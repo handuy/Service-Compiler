@@ -4,30 +4,24 @@ ENV HOST 0.0.0.0
 
 ENV WDIR $GOPATH/src/git.hocngay.com/techmaster/service-complier
 
-
 RUN mkdir -p $WDIR
 
 ADD . $WDIR
 
 WORKDIR $WDIR
 
-RUN go build -o compiler ./cmd/run
-
-RUN ls && echo $WDIR
+RUN go build -o complier ./cmd/run
 
 FROM minhcuong/alpine-consul
 
-# Add s6 service
-ADD root /
-
-RUN mkdir -p /app/build/ &&mkdir /app/root
+RUN mkdir -p /app/build/
 RUN mkdir /app/temp
 
-#COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-compiler/build /app/build/
+ADD root /
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/root /app/root/
 
-COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-compiler/compiler /app/
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/complier /app/
 
 RUN apk update && apk add docker
 
