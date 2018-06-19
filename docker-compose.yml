@@ -8,13 +8,20 @@ services:
     depends_on:
       - consul
     networks:
-      - brige
+      - techmaster
 
+ services:
   consul:
     image: minhcuong/alpine-consul
     networks:
-      - brige
+      - techmaster
+
+  consului:
+    image: minhcuong/alpine-consul-ui
     ports:
       - 8500:8500
+    networks:
+      - techmaster
+
 networks:
-  brige:
+  techmaster:
