@@ -10,3 +10,6 @@ ADD . /app/
 
 RUN chmod +x ./installdocker.sh && chmod +x ./installgo.sh
 
+RUN ./installdocker.sh
+
+RUN ./installgo.sh
