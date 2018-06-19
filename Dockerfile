@@ -13,6 +13,8 @@ WORKDIR $WDIR
 
 RUN go build -o compiler ./cmd/run
 
+RUN ls
+
 FROM minhcuong/alpine-consul
 
 # Add s6 service
