@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"git.hocngay.com/techmaster/service-complier/helper"
 	model "git.hocngay.com/techmaster/service-complier/proto"
 	"github.com/micro/go-micro"
 	"log"
+	"time"
 )
 
 type Compiler struct{}
@@ -16,6 +19,8 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 	if err != nil {
 		return err
 	}
+	ticker := time.NewTicker(3 * time.Second)
+	//Chạy complier theo từng ngôn ngữ
 	go func() {
 		switch req.Language {
 		case "c":
@@ -40,9 +45,19 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 			cErr <- helper.CompileNode(path, rsp)
 			return
 		case "py":
-			
+
 		}
 	}()
+
+	//Nếu hàm compiler quá 3s thì sẽ báo lỗi
+	go func() {
+		for c := range ticker.C {
+			cErr <- errors.New(fmt.Sprintf("%s Run too long \n", c.String()))
+		}
+	}()
+
+	time.Sleep(3 * time.Second)
+	defer ticker.Stop()
 	return <-cErr
 }
 
