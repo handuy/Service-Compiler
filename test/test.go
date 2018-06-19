@@ -23,10 +23,11 @@ func CatchTimeOut() error {
 		}
 	}()
 	go func() {
-		for c:=range time.Tick(1000){
-			fmt.Printf("\r %v" ,c.String())
+		for {
+			fmt.Printf("\r %v" ,"asdasdas")
 		}
 	}()
+
 	time.Sleep(3 * time.Second)
 	defer ticker.Stop()
 	fmt.Println("Ticker stopped")

@@ -7,6 +7,7 @@ import (
 	"git.hocngay.com/techmaster/service-complier/helper"
 	model "git.hocngay.com/techmaster/service-complier/proto"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/registry"
 	"log"
 	"time"
 )
@@ -19,9 +20,10 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 	if err != nil {
 		return err
 	}
-	ticker := time.NewTicker(3 * time.Second)
+	ticker := time.NewTicker(1 * time.Second)
 	//Chạy complier theo từng ngôn ngữ
 	go func() {
+		fmt.Println(time.Now())
 		switch req.Language {
 		case "c":
 			cErr <- helper.ComplieC(path, rsp)
@@ -56,8 +58,7 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 		}
 	}()
 
-	time.Sleep(3 * time.Second)
-	defer ticker.Stop()
+	fmt.Println(time.Now())
 	return <-cErr
 }
 
@@ -65,6 +66,7 @@ func main() {
 	helper.Init()
 	service := micro.NewService(
 		micro.Name("compiler"),
+		micro.Registry(registry.NewRegistry(registry.Timeout(4*time.Second))),
 	)
 
 	service.Init()
