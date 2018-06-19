@@ -11,11 +11,6 @@ ADD . $WDIR
 
 WORKDIR $WDIR
 
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
-
-RUN git checkout development
-
 RUN go build -o compiler .
 
 FROM minhcuong/alpine-consul
