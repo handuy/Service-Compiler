@@ -29,7 +29,5 @@ RUN apk update && apk add docker && apk add openrc
 
 RUN rc-update add docker boot
 
-RUN service docker start
-
 
 EXPOSE 8888
