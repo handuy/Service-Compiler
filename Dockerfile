@@ -1,13 +1,6 @@
-FROM golang:latest
+FROM ubuntu:16.04
 
-RUN mkdir -p $GOPATH/src/git.hocngay.com/techmaster/service-complier
+RUN apt-get -y update&& apt-get -y upgrade
 
-ADD . $GOPATH/src/git.hocngay.com/techmaster/service-complier
+RUN chmod +x ./installdocker.sh && chmod +x ./installgo.sh
 
-WORKDIR $GOPATH/src/git.hocngay.com/techmaster/service-complier
-
-RUN go build -o service-complier .
-
-RUN chmod +x ./installdocker.sh && ./installdocker.sh
-
-CMD ["./service-complier"]

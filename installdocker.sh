@@ -1,28 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
+wget https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz
 
-rm /var/lib/apt/lists/*
+mkdir -p ./gen/docker
 
-lsb_release -a
+tar xzvf ./docker-18.03.1-ce.tgz 
 
-apt-get -y install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+cp /home/test/autobash/docker/* /usr/bin/
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+dockerd &
 
-apt-key fingerprint 0EBFCD88
-
-add-apt-repository  -y \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-apt-get update
-
-apt-get install docker-ce
-
-apt-get install systemd
-
-systemctl enable docker
