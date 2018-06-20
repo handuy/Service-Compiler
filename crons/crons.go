@@ -21,8 +21,8 @@ type Cron struct {
 
 func NewCron() *Cron {
 	path := flag.String("path", "/root/temp", "path of folder contains files are complied ")
-	user := flag.String("path", "root", "path of folder contains files are complied ")
-	pDur := flag.String("path", "4s", "path of folder contains files are complied ")
+	user := flag.String("user", "root", "user name of container ")
+	pDur := flag.String("pdur", "4s", "time duration of process ")
 	interval := flag.String("interval", "3s", "time duration to reload delete old file")
 	fDur := flag.String("fdur", "1h", "old file is exist duration")
 	maxcpu := flag.Float64("maxcpu", 60, "max percent of cpu ")

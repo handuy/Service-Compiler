@@ -1,21 +1,23 @@
 FROM golang:alpine
 
+RUN adduser -D dev
+
+USER dev
+
 RUN mkdir $GOPATH/src/server
 
-RUN mkdir $GOPATH/src/temp
+RUN mkdir $GOPATH/src/temp &&mkdir $HOME/app/
 
-ADD . $GOPATH/src/server
+WORKDIR $HOME/app/
 
-WORKDIR $GOPATH/src/server
+ADD . $HOME/app/
 
-RUN go build -o svc .
+
+RUN ls&& pwd&&whoami
 
 RUN export PATH=$PATH:$GOROOT/bin
 
 VOLUME $GOPATH/src/server
 
-RUN adduser -D dev
 
-USER dev
-
-CMD ["./svc"]
+CMD ["/app/cron"]

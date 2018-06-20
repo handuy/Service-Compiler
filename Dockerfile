@@ -12,14 +12,17 @@ WORKDIR $WDIR
 
 RUN go build -o complier ./cmd/run
 
+RUN go build -o cron ./cmd/cron
+
 FROM minhcuong/alpine-consul
 
-RUN mkdir -p /app/build/
-RUN mkdir /app/temp
+RUN mkdir -p /app/build/ && mkdir -p /app/build/ && mkdir /app/temp
 
 ADD root /
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/build /app/build/
+
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/cron /app/cron/
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/root /app/root/
 
