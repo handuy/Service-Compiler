@@ -20,4 +20,4 @@ RUN export PATH=$PATH:$GOROOT/bin
 VOLUME $GOPATH/src/server
 
 
-CMD ["/app/cron"]
+CMD ["/home/dev/app/cron"]
