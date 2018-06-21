@@ -61,6 +61,7 @@ func (t *Cron) Remove(c time.Time) {
 
 func (t *Cron) CheckCPU() {
 	infos, err := process.Processes()
+	logrus.Infof("Kiểm tra các Process")
 	if err != nil {
 		logrus.Errorf("Không lấy được danh sách các Process %s  Message: %s \n", t.Pwd, err.Error())
 		return
@@ -73,7 +74,7 @@ func (t *Cron) CheckCPU() {
 		percentRam, _ := info.MemoryPercent()
 		createdTime, _ := info.CreateTime()
 		duration := time.Since(time.Unix(createdTime, 0))
-		if userName == t.UserName && percent >= t.MaxCPU || percentRam >= t.MaxRAM && duration >= t.ProcessDur {
+		if  percent >= t.MaxCPU || percentRam >= t.MaxRAM && duration >= t.ProcessDur {
 			logrus.Infof(" Tìm thấy Process:  PID %v Name %v UserName %v  Percent %v \n", info.Pid, name, userName, percent)
 			info.Kill()
 		}
