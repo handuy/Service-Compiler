@@ -1,15 +1,15 @@
 FROM node:alpine
 
-RUN mkdir $HOME/app
-
-RUN mkdir $HOME/temp
-
-ADD . $HOME/app
-
-WORKDIR $HOME/app
+ENV WDIR /home/dev/app
 
 RUN adduser -D dev
 
 USER dev
 
-CMD ["node","run.js"]
+RUN mkdir $WDIR && mkdir -p /home/dev/temp
+
+WORKDIR $WDIR
+
+ADD . $WDIR
+
+CMD ["/home/dev/app/cron","-path=/home/dev/temp"]

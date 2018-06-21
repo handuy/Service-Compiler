@@ -10,7 +10,7 @@ const (
 
 	RootJS       = "./temp/js"
 	ComplierJS   = "complier-js"
-	PathFileJS   = "/root/temp"
+	PathFileJS   = "/home/dev/temp"
 	JSDockerfile = "./build/jsdoc/."
 
 	RootC="./temp/c"

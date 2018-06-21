@@ -46,10 +46,9 @@ func NewCron() *Cron {
 }
 
 func (t *Cron) Remove(c time.Time) {
-	logrus.Infoln("Tìm kiếm file đã hết hạn: ")
 	info, err := ioutil.ReadDir(t.Pwd)
 	if err != nil {
-		fmt.Errorf("Không đọc được thư mục %s \n Message: %s", t.Pwd, err.Error())
+		logrus.Errorf("Không đọc được thư mục %s  Message: %s \n", t.Pwd, err.Error())
 		return
 	}
 	for _, inf := range info {
@@ -61,10 +60,9 @@ func (t *Cron) Remove(c time.Time) {
 }
 
 func (t *Cron) CheckCPU() {
-	logrus.Infoln("Kiểm tra các Process: ")
 	infos, err := process.Processes()
 	if err != nil {
-		fmt.Errorf("Không lấy được danh sách các Process %s \n Message: %s", t.Pwd, err.Error())
+		logrus.Errorf("Không lấy được danh sách các Process %s  Message: %s \n", t.Pwd, err.Error())
 		return
 	}
 	for _, info := range infos {
@@ -76,7 +74,7 @@ func (t *Cron) CheckCPU() {
 		createdTime, _ := info.CreateTime()
 		duration := time.Since(time.Unix(createdTime, 0))
 		if userName == t.UserName && percent >= t.MaxCPU || percentRam >= t.MaxRAM && duration >= t.ProcessDur {
-			fmt.Printf("\r PID %v Name %v UserName %v  Percent %v \n", info.Pid, name, userName, percent)
+			logrus.Infof(" Tìm thấy Process:  PID %v Name %v UserName %v  Percent %v \n", info.Pid, name, userName, percent)
 			info.Kill()
 		}
 	}
