@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
+	"github.com/sirupsen/logrus"
 )
 
 type Cron struct {
@@ -45,10 +46,10 @@ func NewCron() *Cron {
 }
 
 func (t *Cron) Remove(c time.Time) {
-	time.Sleep(1 * time.Hour)
+	logrus.Infoln("Tìm kiếm file đã hết hạn: ")
 	info, err := ioutil.ReadDir(t.Pwd)
 	if err != nil {
-		fmt.Errorf("Error read dir %s \n Message: %s", t.Pwd, err.Error())
+		fmt.Errorf("Không đọc được thư mục %s \n Message: %s", t.Pwd, err.Error())
 		return
 	}
 	for _, inf := range info {
@@ -60,9 +61,10 @@ func (t *Cron) Remove(c time.Time) {
 }
 
 func (t *Cron) CheckCPU() {
+	logrus.Infoln("Kiểm tra các Process: ")
 	infos, err := process.Processes()
 	if err != nil {
-		fmt.Errorf("Error read dir %s \n Message: %s", t.Pwd, err.Error())
+		fmt.Errorf("Không lấy được danh sách các Process %s \n Message: %s", t.Pwd, err.Error())
 		return
 	}
 	for _, info := range infos {
