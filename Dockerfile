@@ -32,7 +32,7 @@ COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/r
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/complier /app/
 
-COPY --from=build-compiler /go/bin/micro /usr/bin/
+#COPY --from=build-compiler /go/bin/micro /usr/bin/
 
 RUN chmod +x /app/complier
 
