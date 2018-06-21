@@ -31,7 +31,7 @@ func NewCron() *Cron {
 	ps, _ := time.ParseDuration(*pDur)
 	itv, _ := time.ParseDuration(*interval)
 	fd, _ := time.ParseDuration(*fDur)
-	return &Cron{
+	cron:= &Cron{
 		Pwd:        *path,
 		UserName:   *user,
 		MaxCPU:     *maxcpu,
@@ -40,6 +40,8 @@ func NewCron() *Cron {
 		Interval:   itv,
 		Fdur:       fd,
 	}
+	fmt.Println(cron)
+	return cron
 }
 
 func (t *Cron) Remove(c time.Time) {
@@ -85,4 +87,19 @@ func (t *Cron) Run() {
 		t.Remove(c)
 		t.CheckCPU()
 	}
+}
+
+func (t *Cron) String() string{
+	return fmt.Sprintf(`
+		Cron job infomation:
+
+		Path: 				%s
+		UserName :			%s
+		MaxCPU: 			%v
+		MaxRam: 			%v
+		Process Duration: 	%v
+		Interval: 			%v
+		Filde Duration: 	%v
+
+`,t.Pwd,t.UserName,t.MaxCPU,t.MaxRAM,t.ProcessDur,t.Interval,t.Fdur)
 }
