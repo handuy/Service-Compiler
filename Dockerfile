@@ -14,10 +14,6 @@ RUN go build -o cron ./cmd/cron
 
 RUN go build -o complier ./cmd/run
 
-RUN apk add --no-cache bash git openssh
-
-RUN go get -u github.com/micro/micro
-
 FROM minhcuong/alpine-consul
 
 RUN mkdir -p /app/build/ && mkdir -p /app/build/ && mkdir /app/temp
@@ -31,8 +27,6 @@ COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/c
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/root /app/root/
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/complier /app/
-
-COPY --from=build-compiler /go/bin/micro /usr/bin/
 
 RUN chmod +x /app/complier
 
