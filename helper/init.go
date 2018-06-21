@@ -5,6 +5,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os/exec"
+	"fmt"
 )
 
 func Init() {
@@ -16,7 +17,7 @@ func Init() {
 		if !f.IsDir() {
 			continue
 		}
-		CopyFile("./cron", "./build"+f.Name())
+		CopyFile("./cron", fmt.Sprintf("%s/%s/%s","./build",f.Name(),"cron"))
 	}
 
 	initGo()
