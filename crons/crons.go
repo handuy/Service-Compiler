@@ -74,6 +74,9 @@ func (t *Cron) CheckCPU() {
 		percentRam, _ := info.MemoryPercent()
 		createdTime, _ := info.CreateTime()
 		duration := time.Since(time.Unix(createdTime, 0))
+
+		logrus.Infof(" Info:  Name %v UserName %v  PercentCPU %v RamUse %v \n", name, userName, percent,percentRam)
+
 		if  percent >= t.MaxCPU || percentRam >= t.MaxRAM || duration >= t.ProcessDur {
 			logrus.Infof(" Tìm thấy Process:  PID %v Name %v UserName %v  Percent %v \n", info.Pid, name, userName, percent)
 			info.Kill()
