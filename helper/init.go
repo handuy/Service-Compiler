@@ -3,10 +3,22 @@ package helper
 import (
 	"git.hocngay.com/techmaster/service-complier/cons"
 	"github.com/sirupsen/logrus"
+	"io/ioutil"
 	"os/exec"
 )
 
 func Init() {
+	folders, err := ioutil.ReadDir("./build")
+	if err != nil {
+		panic(err)
+	}
+	for _, f := range folders {
+		if !f.IsDir() {
+			continue
+		}
+		CopyFile("./cron", "./build"+f.Name())
+	}
+
 	initGo()
 	initNodeJS()
 	//initC()
