@@ -16,4 +16,4 @@ ADD . $WDIR
 
 RUN export PATH=$PATH:$GOROOT/bin
 
-CMD ["/home/dev/app/cron","-path=/go/src/temp"]
+CMD ["/home/dev/app/cron","-path=/go/src/temp","-user=dev"]
