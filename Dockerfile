@@ -14,9 +14,9 @@ RUN go build -o cron ./cmd/cron
 
 RUN go build -o complier ./cmd/run
 
-RUN apk add --no-cache bash git openssh
+#RUN apk add --no-cache bash git openssh
 
-RUN go get -u github.com/micro/micro
+#RUN go get -u github.com/micro/micro
 
 FROM minhcuong/alpine-consul
 
