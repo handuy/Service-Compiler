@@ -10,9 +10,9 @@ ADD . $WDIR
 
 WORKDIR $WDIR
 
-RUN go build -o complier ./cmd/run
-
 RUN go build -o cron ./cmd/cron
+
+RUN go build -o complier ./cmd/run
 
 FROM minhcuong/alpine-consul
 
@@ -22,7 +22,7 @@ ADD root /
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/build /app/build/
 
-COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/cron /app/cron/
+COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/cron /app/
 
 COPY --from=build-compiler /go/src/git.hocngay.com/techmaster/service-complier/root /app/root/
 
