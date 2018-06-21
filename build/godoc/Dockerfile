@@ -1,19 +1,18 @@
 FROM golang:alpine
 
+ENV WDIR /home/dev/app
+
 RUN adduser -D dev
 
 USER dev
 
-RUN mkdir $GOPATH/src/server
+RUN mkdir $WDIR
 
-RUN mkdir $GOPATH/src/temp &&mkdir $HOME/app/
+RUN mkdir $GOPATH/src/temp
 
-WORKDIR $HOME/app/
+WORKDIR $WDIR
 
-ADD . $HOME/app/
-
-
-RUN ls&& pwd&&whoami
+ADD . $WDIR
 
 RUN export PATH=$PATH:$GOROOT/bin
 
