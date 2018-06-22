@@ -20,7 +20,7 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 	if err != nil {
 		return err
 	}
-	ticker := time.NewTicker(1 * time.Second)
+	ticker := time.NewTicker(3 * time.Second)
 	//Chạy complier theo từng ngôn ngữ
 	go func() {
 		fmt.Println(time.Now())
@@ -28,18 +28,6 @@ func (g *Compiler) Run(ctx context.Context, req *model.CompileRequest, rsp *mode
 		case "c":
 			cErr <- helper.ComplieC(path, rsp)
 			return
-		//case "c++":
-		//	cErr <- helper.ComplieCPlus(path, rsp)
-		//	return
-		//case "c#":
-		//	cErr <- helper.ComplieDotNet(path, rsp)
-		//	return
-		//case "php":
-		//	cErr <- helper.ComplieDotNet(path, rsp)
-		//	return
-		//case "java":
-		//	cErr <- helper.ComplieDotNet(path, rsp)
-		//	return
 		case "go":
 			cErr <- helper.CompileGo(path, rsp)
 			return
