@@ -37,4 +37,22 @@ B4: Trả về kết quả
 Cron job sẽ tìm kiếm các file cũ(file tồn tại quá 1 tiếng để delete)
 
 
-  
+
+**CẤU TRÚC THƯ MỤC**
+#### build: 
+- Chứa các image tương ứng với từng trình biên dịch của các ngôn ngữ
+#### cmd:
+- **cron** : là  source để build cron job
+- **run**:    là source để build compiler tổng 
+ #### cons:
+ - chứa các hằng số được định nghĩa trong project
+ #### crons:
+ - chứa các hàm được định nghĩa trong cron job
+ #### helper:
+ - chứa các hàm được định nghĩa trong compiler
+#### proto: 
+- chứa các message được định nghĩa trong proto 
+#### temp:
+- mẫu thư mục mà các file tạm thời được sinh ra trong quá trình compiler được lưu vào
+ 
+
