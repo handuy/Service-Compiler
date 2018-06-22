@@ -20,6 +20,7 @@ type Cron struct {
 	ProcessDur time.Duration
 }
 
+//Định nghĩa thiết lập thông số của cron job qua tham số command
 func NewCron() *Cron {
 	path := flag.String("path", "/root/temp", "path of folder contains files are complied ")
 	user := flag.String("user", "dev", "user name of container ")

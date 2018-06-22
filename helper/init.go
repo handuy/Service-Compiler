@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+//Khởi tạo các tài nguyên cần để chạy compiler
 func Init() {
 	folders, err := ioutil.ReadDir("./build")
 	if err != nil {
